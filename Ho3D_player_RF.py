@@ -13,8 +13,8 @@ yarp.Network.init()
 
 class iCWT_player(yarp.RFModule):
     def configure(self, rf):
-        self.dataset_folder = '/home/elisa/Data/Ho3D'
-        self.images_folder = self.dataset_folder + '/train'
+        self.dataset_folder = '/home/icub/Users/emaiettini/ObjectDetectionEvaluation/HO3D_V2_Json_format/train'
+        self.images_folder = self.dataset_folder + '/Images'
         self.imageset = self.dataset_folder + '/ImageSets/imageset_test.txt'
 
         self.image_w = 640
@@ -98,12 +98,12 @@ class iCWT_player(yarp.RFModule):
             print(item)
             im_info = item.split('/')
 
-            if os.path.exists(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.jpg')):
-                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.jpg')))
-            elif os.path.exists(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.ppm')):
-                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.ppm')))
-            elif os.path.exists(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.png')):
-                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], 'rgb', im_info[1] + '.png')))
+            if os.path.exists(os.path.join(self.images_folder, im_info[0], im_info[1] + '.jpg')):
+                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], im_info[1] + '.jpg')))
+            elif os.path.exists(os.path.join(self.images_folder, im_info[0], im_info[1] + '.ppm')):
+                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], im_info[1] + '.ppm')))
+            elif os.path.exists(os.path.join(self.images_folder, im_info[0], im_info[1] + '.png')):
+                image = np.array(Image.open(os.path.join(self.images_folder, im_info[0], im_info[1] + '.png')))
             else:
                 print('Image {} not found in folder {}'.format(item, self.images_folder))
 
@@ -116,7 +116,7 @@ class iCWT_player(yarp.RFModule):
                 self.state = 'do_nothing'
             else:
                 self.counter = self.counter + 1
-                time.sleep(0.5)
+                time.sleep(0.1)
         elif self.state == 'quit':
             self.cleanup()
             sys.exit("Ports closed. Quitting.")

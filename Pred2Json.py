@@ -12,20 +12,22 @@ from collections import OrderedDict
 #    .....
 
 dict_cls_to_id = {
-    'cleanser'       : 0,
+    'bleach'         : 0,
     'banana'         : 1,
-    'potted_meatcan' : 2,
+    'pottedmeat'     : 2,
     'scissors'       : 3,
     'crackerbox'     : 4,
-    'powerdrill'     : 5,
+    'driller'        : 5,
     'sugarbox'       : 6,
-    'mustard_bottle' : 7,
+    'mustard'        : 7,
     'mug'            : 8,
     'pitcher'        : 9
 }
 
 
 def add_prediction_to_array(image_id, prediction, array):
+    if len(prediction.split('((')) == 2:
+        return array
     ps = prediction.split('(')
     for i in range(1, len(ps), 2): # It reads all odds element of the array
         p = ps[i].split(' ')
@@ -34,7 +36,7 @@ def add_prediction_to_array(image_id, prediction, array):
         xmax  = float(p[2])
         ymax  = float(p[3])
         score = float(p[4])
-        label = p[5]
+        label = p[6]
         w = xmax - xmin
         h = ymax - ymin
 
@@ -50,9 +52,9 @@ def add_prediction_to_array(image_id, prediction, array):
     return array
 
 
-predictions_path =      "/home/elisa/Repos/object_detection_evaluation/predictions"
-predictions_json_file = "predictions.json"
-imageset_file =         "/home/elisa/Data/Ho3D/ImageSets/imageset_test_short.txt"
+predictions_path =      "/home/icub/Users/emaiettini/ObjectDetectionEvaluation/yarp_predictions/clean_dispblobber_00001"
+predictions_json_file = "predictions_clean_dispblobber_00001.json"
+imageset_file =         "/home/icub/Users/emaiettini/ObjectDetectionEvaluation/HO3D_V2_Json_format/train/ImageSets/imageset_test.txt"
 
 
 

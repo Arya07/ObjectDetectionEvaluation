@@ -9,7 +9,7 @@ from pycocotools.coco import COCO
 # This functions expects to have a json file for the annotation and a json file for the predictions
 #def compute_map():
 COCO_GT_ANNOTATION = "annotations.json"
-COCO_VAL_PRED = "predictions.json"
+COCO_VAL_PRED = "predictions_clean_dispblobber_00001.json"
 # use the COCO class to load and read the ground-truth annotations
 cocoAnnotation = COCO(annotation_file=COCO_GT_ANNOTATION)
 
